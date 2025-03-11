@@ -1,0 +1,29 @@
+services:
+  minecraft_creative_bedrock:
+    # https://github.com/itzg/docker-minecraft-bedrock-server
+    image: itzg/minecraft-bedrock-server
+    container_name: minecraft-creative-bedrock
+    stdin_open: true
+    tty: true
+    ports:
+      - "19171:19132/udp"
+    volumes:
+      - ./permissions.json:/data/permissions.json
+      - ./allowlist.json:/data/allowlist.json
+      - minecraft_creative_data:/data
+    environment:
+      EULA: "TRUE"
+      VERSION: "LATEST"
+      TZ: "Europe/Paris"
+      GAMEMODE: "creative"
+      DIFFICULTY: "normal"
+      ALLOW_CHEATS: "true"
+      MAX_PLAYERS: "10"
+      LEVEL_SEED: "8678942899319966093"
+      LEVEL_NAME: "LesLoustics"
+      ONLINE_MODE: "true"
+      ALLOW_LIST: "true"
+    restart: unless-stopped
+
+volumes:
+  minecraft_creative_data:
